@@ -3,18 +3,18 @@ import { ConsecionariaMangager } from "../controllers/ConsecionariaManager.js";
 
 
 const routerConsecionaria = Router();
-const conseAuto = new ConsecionariaMangager('./src/modules/consecionaria.json')
+const conseAuto = new ConsecionariaMangager('./src/moduls/consecionaria.json')
 
 routerConsecionaria.get('/', async(req,res)=>{
     const {limit} = req.query
-    const con = await ConsecionariaMangager.getConsecionaria()
+    const con = await conseAuto.getConsecionaria()
     const consecionaria = con.slice(0,limit)
     res.status(200).send(consecionaria)
 })
 
 routerConsecionaria.get('/:id', async(req,res)=>{
 const {id} = req.params
-const con = await ConsecionariaMangager.getAutoById(parseInt(id))
+const con = await conseAuto.getAutoById(parseInt(id))
 if(con)
 res.status(200).send(con)
 else
@@ -24,7 +24,7 @@ res.status(404).send('No existe')
 })
 
 routerConsecionaria.post('/', async(req,res)=>{
-   const confirmacion = await ConsecionariaMangager.addCar(req.body)
+   const confirmacion = await conseAuto.addCar(req.body)
 
    if(confirmacion)
     res.status(200).send('Auto creado')
@@ -37,7 +37,7 @@ routerConsecionaria.post('/', async(req,res)=>{
     routerConsecionaria.put('/', async(req,res)=>{
 
         
-        const confirmacion = await ConsecionariaMangager.updateCar(req.body,req.params)
+        const confirmacion = await conseAuto.updateCar(req.body,req.params)
      
         if(confirmacion)
          res.status(200).send('Auto Actualizado')
@@ -51,7 +51,7 @@ routerConsecionaria.post('/', async(req,res)=>{
          routerConsecionaria.delete('/:id', async(req,res)=>{
 
         
-            const confirmacion = await ConsecionariaMangager.deleteCar(req.body,req.params)
+            const confirmacion = await conseAuto.deleteCar(req.body,req.params)
          
             if(confirmacion)
              res.status(200).send('Auto Eliminado')
