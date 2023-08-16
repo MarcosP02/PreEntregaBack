@@ -12,7 +12,7 @@ this.auto = auto
 async addCar (consecionaria){
   const cars = JSON.parse(await fs.readFile(this.carspath,'utf-8'))
 
-const car = cars.find(car => car.code === consecionaria.code)
+const car = cars.find(car => car.code === code)
 if(car){
 return false
 
@@ -20,8 +20,8 @@ return false
 }
 else{
     consecionaria.id = ConsecionariaMangager.incrementId()
-    cars.push(consecionaria)
-    JSON.parse(await fs.readFile(this.carspath,'utf-8'))
+    car.push(consecionaria)
+    JSON.parse(await fs.readFile(this.carpath,'utf-8'))
 
     await fs.writeFile(this.carspath, JSON.stringify(cars));
     
@@ -35,14 +35,14 @@ else{
  
 
 async getConsecionaria(){
-    this.autos = JSON.parseInt(await fs.readFile(this.carsPath,'utf-8'))
+    this.autos = JSON.parseInt(await fs.readFile(this.carspath,'utf-8'))
   return this.autos
   
   }
 
 
-  async getAutoByID (id) {
-    const cars1 = JSON.parse(await fs.readFile(this.carsPath, 'utf-8'))
+  async getAutoById (id) {
+    const cars1 = JSON.parse(await fs.readFile(this.carspath, 'utf-8'))
  const porid = cars1.find(porid => porid.id === id)
 
     if (porid) {

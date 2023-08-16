@@ -2,12 +2,13 @@ import { Router } from "express";
 import { ConsecionariaMangager } from "../controllers/ConsecionariaManager.js";
 
 
+
 const routerConsecionaria = Router();
-const conseAuto = new ConsecionariaMangager('./src/moduls/consecionaria.json')
+const conseAuto = new ConsecionariaMangager('../src/models/consecionaria.json')
 
 routerConsecionaria.get('/', async(req,res)=>{
     const {limit} = req.query
-    const con = await conseAuto.getConsecionaria()
+    const con = await conseAuto.getConsecionaria()    
     const consecionaria = con.slice(0,limit)
     res.status(200).send(consecionaria)
 })
